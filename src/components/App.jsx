@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { nanoid } from 'nanoid';
 import { GlobalStyle } from './GlobalStyle';
+import { Box } from './Box';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { ContactForm } from './ConactForm/ContactForm';
@@ -65,7 +66,14 @@ export const App = () => {
       <h1>Phonebook</h1>
       <ContactForm onSubmit={addNewContact} />
       <h2>Contacts</h2>
-      <Filter value={filter} onChange={onChangeFilter} />
+      {contacts.length > 0 ? (
+        <Filter value={filter} onChange={onChangeFilter} />
+      ) : (
+        <Box as="h2" display="block" mt="30px">
+          There are no contacts in your phonebook!
+        </Box>
+      )}
+
       {contacts.length > 0 && (
         <ContactList
           contacts={vizibleContacts()}
